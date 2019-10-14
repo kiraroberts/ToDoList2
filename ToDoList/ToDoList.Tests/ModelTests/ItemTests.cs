@@ -41,6 +41,7 @@ namespace ToDoList.Tests
         // Assert
         Assert.AreEqual(firstItem, secondItem);
       }
+      
       [TestMethod]
       public void Save_SavesToDatabase_ItemList()
       {
@@ -56,6 +57,20 @@ namespace ToDoList.Tests
         CollectionAssert.AreEqual(testList, result);
       }
 
+      [TestMethod]
+      public void Find_ReturnsCorrectItemFromDatabase_Item()
+      {
+        //Arrange
+        Item newItem = new Item("Mow the lawn");
+        newItem.Save();
+        Item newItem2 = new Item("Wash dishes");
+        newItem2.Save();
+
+        //Act
+        Item foundItem = Item.Find(newItem.Id);
+        //Assert
+        Assert.AreEqual(newItem, foundItem);
+      }
 
       // [TestMethod]
       // public void ItemConstructor_CreatesInstanceOfItem_Item()
